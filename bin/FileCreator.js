@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const runFileCreator = async () => {
+  const chalk = require("chalk");
+
   const Parameters = require("../src/Parameters.js");
   const DefineFile = require("../src/DefineFile.js");
   const CreateFiles = require("../src/CreateFiles.js");
@@ -11,9 +13,9 @@ const runFileCreator = async () => {
   );
   await new CreateFiles().do(files);
 
-  console.log(
-    `Success! Created file. :)\nFile name: ${fileName}\nFolder: src/${folderName}`
-  );
+  console.log(chalk.green("Success! Created fileName. :)"));
+  console.log(chalk.blue("File"), fileName);
+  console.log(chalk.blue("Folder"), `src/${folderName}`);
 };
 
 runFileCreator();

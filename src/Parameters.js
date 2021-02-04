@@ -1,4 +1,5 @@
 const ArgumentParser = require("argparse").ArgumentParser;
+const chalk = require("chalk");
 
 class Parameters {
   constructor() {
@@ -14,7 +15,12 @@ class Parameters {
     const args = this.parser.parse_args();
     const paramsFile = args.file;
     if (!paramsFile) {
-      console.error("Provide a filename :)");
+      console.log(chalk.red("****************************"));
+      console.log(chalk.yellow("Filename not entered :("));
+      console.log(chalk.yellow("Examples"));
+      console.log("FileCreator -f folder/fileName");
+      console.log("FileCreator -f fileName");
+      console.log(chalk.red("****************************"));
       process.exit(1);
     }
     return paramsFile;

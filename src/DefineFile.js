@@ -1,10 +1,10 @@
 const path = require("path");
 const fs = require("fs");
 const { paramCase } = require("param-case");
+const Template = require("../template/template");
 
 class DefineFile {
-  constructor() {
-  }
+  constructor() {}
 
   getFilesToCreate(pathFile) {
     const { fileName, folderName } = this.splitPathFile(pathFile);
@@ -18,7 +18,7 @@ class DefineFile {
     files.push(this.getFileContentAndFilePathVue(fileInfo));
     files.push(this.getFileContentAndFilePathSCSS(fileInfo));
 
-    return {files, fileName, folderName};
+    return { files, fileName, folderName };
   }
 
   splitPathFile(pathFile) {
@@ -34,41 +34,13 @@ class DefineFile {
   getFileContentAndFilePathVue = ({ appFolder, folderName, fileName }) => {
     const filePath = path.join(
       appFolder,
-      './src',
+      "./src",
       folderName,
       `${fileName}.vue`
     );
     const className = paramCase(fileName);
 
-    const fileContent = `<style src="./${fileName}.scss" lang="scss" scoped></style>
-<template lang="html">
-  <section class="${className}">
-  </section>
-</template>
-<script>
-export default {
-  name: "${fileName}",
-
-  components: {},
-
-  mixins: [],
-
-  data() {
-    return {};
-  },
-
-  computed: {},
-
-  watch: {},
-
-  mounted() {},
-
-  beforeDestroy() {},
-  
-  methods: {},
-};
-</script>
-    `;
+    const fileContent = Template.getVue(fileName, className);
 
     return { fileContent, filePath };
   };
@@ -76,13 +48,13 @@ export default {
   getFileContentAndFilePathSCSS = ({ appFolder, folderName, fileName }) => {
     const filePath = path.join(
       appFolder,
-      './src',
+      "./src",
       folderName,
       `${fileName}.scss`
     );
     const className = paramCase(fileName);
 
-    const fileContent = `.${className} {}`;
+    const fileContent = Template.getScss(className);
 
     return { fileContent, filePath };
   };
