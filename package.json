@@ -1,0 +1,20 @@
+{
+  "name": "vuefilecreator",
+  "version": "0.0.1",
+  "description": "VueJs file creator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/FileCreator",
+    "test": "NODE_ENV=test jest"
+  },
+  "bin": {
+    "FileCreator": "./bin/FileCreator.js"
+  },
+  "author": "Gabriel Portugal",
+  "license": "MIT",
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "mkdirp": "^1.0.4",
+    "param-case": "^3.0.4"
+  }
+}
